@@ -1,4 +1,5 @@
 const lienzo = document.querySelector('#lienzo');
+// git push -u origin master
 lienzo.width = window.innerWidth;
 lienzo.Height = window.innerHeight;
 let context = lienzo.getContext('2d');
@@ -42,14 +43,19 @@ lienzo.addEventListener('mousedown', (e) => {
 	lastX = e.offsetX;
 	lastY = e.offsetY;
 });
+
 lienzo.addEventListener('mousemove', draw);
-lienzo.addEventListener('mouseup', () => {
-	isDrawing = false;
+lienzo.addEventListener('mouseup', () => {isDrawing = false;});
+lienzo.addEventListener('mouseout', () => {isDrawing = false;});
+
+
+lienzo.addEventListener('touchstart', (e) => {
+	isDrawing = true;
+	lastX = e.offsetX;
+	lastY = e.offsetY;
 });
-lienzo.addEventListener('mouseout', () => {
-	isDrawing = false;
-});
-// context.fillRect(20, 20, 58, 58); //(Posicion X, Posicion Y, Tamaño X, Tamaño Y)
-// context.arc(35, 25, 25, 0, 13, false);
-// context.fill();
-//context.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+
+lienzo.addEventListener('touchmove', draw);
+lienzo.addEventListener('touchend', () => {isDrawing = false;});
+
+
